@@ -34,9 +34,9 @@ class App extends React.Component {
   saveBnt(event) {
     event.preventDefault();
     this.setState({
-      cardAttr1: '',
-      cardAttr2: '',
-      cardAttr3: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
       cardDescription: '',
       cardName: '',
       cardRare: 'normal',
