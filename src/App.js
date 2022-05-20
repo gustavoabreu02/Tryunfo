@@ -16,6 +16,7 @@ class App extends React.Component {
       cardImage: '',
       isSaveButtonDisabled: true,
       hasTrunfo: false,
+      cartasInfo: [],
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.isSaveButtonDisabled = this.isSaveButtonDisabled.bind(this);
@@ -42,8 +43,9 @@ class App extends React.Component {
     }
   }
 
-  saveBnt(event) {
-    event.preventDefault();
+  saveBnt() {
+    const { cartasInfo } = this.state;
+    cartasInfo.push(this.state);
     this.trunfo();
     this.setState({
       cardAttr1: '0',
@@ -103,6 +105,7 @@ class App extends React.Component {
       cardImage,
       isSaveButtonDisabled,
       hasTrunfo,
+      cartasInfo,
     } = this.state;
     return (
       <div>
@@ -131,6 +134,7 @@ class App extends React.Component {
           cardDescription={ cardDescription }
           cardTrunfo={ cardTrunfo }
         />
+        { cartasInfo.map((value, i) => <Card key={ i } { ...value } />)}
       </div>
     );
   }
