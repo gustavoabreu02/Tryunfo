@@ -11,19 +11,55 @@ class App extends React.Component {
       cardAttr3: '',
       cardDescription: '',
       cardName: '',
-      cardRare: '',
+      cardRare: 'normal',
       cardTrunfo: false,
       cardImage: '',
+      isSaveButtonDisabled: true,
     };
     this.onInputChange = this.onInputChange.bind(this);
+    this.isSaveButtonDisabled = this.isSaveButtonDisabled.bind(this);
   }
 
-  onInputChange({ target }) {
+  async onInputChange({ target }) {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({
+    await this.setState({
       [name]: value,
     });
+    await this.isSaveButtonDisabled();
+  }
+
+  isSaveButtonDisabled() {
+    const maximo = 210;
+    const v = 90;
+    const {
+      cardDescription,
+      cardName,
+      cardRare,
+      cardImage,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3 } = this.state;
+    const um = parseFloat(cardAttr1);
+    const dois = parseFloat(cardAttr2);
+    const três = parseFloat(cardAttr3);
+    if (
+      cardName.length >= 1
+      && cardDescription.length >= 1
+      && cardImage.length >= 1
+      && cardRare.length >= 1
+      && um + dois + três <= maximo
+      && um <= v && dois <= v && três <= v
+      && um >= 0 && dois >= 0 && três >= 0
+    ) {
+      this.setState({
+        isSaveButtonDisabled: false,
+      });
+    } else {
+      this.setState({
+        isSaveButtonDisabled: true,
+      });
+    }
   }
 
   render() {
@@ -36,6 +72,7 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       cardImage,
+      isSaveButtonDisabled,
     } = this.state;
     return (
       <div>
@@ -45,7 +82,7 @@ class App extends React.Component {
           cardAttr2={ cardAttr2 }
           cardAttr3={ cardAttr3 }
           cardDescription={ cardDescription }
-          isSaveButtonDisabled="a"
+          isSaveButtonDisabled={ isSaveButtonDisabled }
           cardName={ cardName }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
