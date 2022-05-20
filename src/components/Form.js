@@ -110,6 +110,7 @@ class Form extends React.Component {
           />
         </label>
         <button
+          name="isSaveButtonDisabled"
           data-testid="save-button"
           type="submit"
           disabled={ isSaveButtonDisabled }
@@ -128,11 +129,15 @@ Form.propTypes = {
   cardName: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardDescription: PropTypes.string.isRequired,
-  onSaveButtonClick: PropTypes.string.isRequired,
-  isSaveButtonDisabled: PropTypes.string.isRequired,
-  cardTrunfo: PropTypes.string.isRequired,
-  onInputChange: PropTypes.string.isRequired,
+  onSaveButtonClick: PropTypes.func.isRequired,
+  isSaveButtonDisabled: PropTypes.bool,
+  cardTrunfo: PropTypes.bool.isRequired,
+  onInputChange: PropTypes.func.isRequired,
   cardImage: PropTypes.string.isRequired,
+};
+
+Form.defaultProps = {
+  isSaveButtonDisabled: true,
 };
 
 export default Form;

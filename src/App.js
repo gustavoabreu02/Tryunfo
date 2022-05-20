@@ -18,15 +18,32 @@ class App extends React.Component {
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.isSaveButtonDisabled = this.isSaveButtonDisabled.bind(this);
+    this.saveBnt = this.saveBnt.bind(this);
   }
 
   async onInputChange({ target }) {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    await this.setState({
+    this.setState({
       [name]: value,
+    }, () => (
+      this.isSaveButtonDisabled()
+    ));
+  }
+
+  saveBnt(event) {
+    event.preventDefault();
+    this.setState({
+      cardAttr1: '',
+      cardAttr2: '',
+      cardAttr3: '',
+      cardDescription: '',
+      cardName: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
+      cardImage: '',
+      isSaveButtonDisabled: true,
     });
-    await this.isSaveButtonDisabled();
   }
 
   isSaveButtonDisabled() {
@@ -87,7 +104,7 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
           onInputChange={ this.onInputChange }
-          onSaveButtonClick="a"
+          onSaveButtonClick={ this.saveBnt }
           cardImage={ cardImage }
         />
         <Card
