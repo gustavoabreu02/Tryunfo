@@ -12,6 +12,7 @@ class Card extends React.Component {
       cardRare,
       cardDescription,
       cardTrunfo,
+      button,
     } = this.props;
     return (
       <div>
@@ -23,6 +24,7 @@ class Card extends React.Component {
         <p data-testid="attr3-card">{cardAttr3}</p>
         <p data-testid="rare-card">{cardRare}</p>
         { cardTrunfo ? <p data-testid="trunfo-card">Super Trunfo</p> : '' }
+        { button }
       </div>
     );
   }
@@ -37,6 +39,7 @@ Card.propTypes = {
   cardRare: PropTypes.string.isRequired,
   cardDescription: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
+  button: PropTypes.element.isRequired,
 };
 
 export default Card;

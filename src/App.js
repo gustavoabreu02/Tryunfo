@@ -134,7 +134,34 @@ class App extends React.Component {
           cardDescription={ cardDescription }
           cardTrunfo={ cardTrunfo }
         />
-        { cartasInfo.map((value, i) => <Card key={ i } { ...value } />)}
+        {cartasInfo.map((value, i) => (
+          <Card
+            key={ i }
+            { ...value }
+            button={
+              <button
+                name={ value.cardName }
+                data-testid="delete-button"
+                type="button"
+                onClick={ (event) => {
+                  const cards = cartasInfo.filter((card) => (
+                    card.cardName !== event.target.name
+                  ));
+                  this.setState({ cartasInfo: [...cards] }, () => {
+                    const verificaCartas = cartasInfo.every((card) => (
+                      card.cardTrunfo === true
+                    ));
+                    if (verificaCartas || cartasInfo === []) {
+                      this.setState({ hasTrunfo: false });
+                    }
+                  });
+                } }
+              >
+                Excluir
+              </button>
+            }
+          />
+        ))}
       </div>
     );
   }
